@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_project/core/helpers/extensions.dart';
+import 'package:flutter_complete_project/core/routing/app_router.dart';
 import 'package:flutter_complete_project/core/themes/colors_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/routing/routes.dart';
 import '../../../core/themes/styles.dart';
 
 class GetStartedButton extends StatelessWidget {
@@ -10,19 +13,21 @@ class GetStartedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        context.pushNamed(Routes.loginScreen);
+      },
       style: ButtonStyle(
-        backgroundColor:
-            const WidgetStatePropertyAll(ColorsManager.primaryBlue),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: WidgetStatePropertyAll(
-          Size(double.infinity, 50.h),
-        ),
-        shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))
-      ),
+          backgroundColor:
+              const WidgetStatePropertyAll(ColorsManager.primaryBlue),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          minimumSize: WidgetStatePropertyAll(
+            Size(double.infinity, 50.h),
+          ),
+          shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))),
       child: Text(
         'Get Started',
-        style: TextStyles.font16WhiteSemiBold,
+        style: MyTextStyles.font16WhiteMedium,
         textAlign: TextAlign.center,
       ),
     );
