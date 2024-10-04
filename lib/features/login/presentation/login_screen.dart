@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../logic/cubit/login_cubit.dart';
 import '../../../core/helpers/spacing.dart';
 import '../../../core/shared_widgets/app_text_button.dart';
-import '../../../core/shared_widgets/app_text_field_form.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/themes/styles.dart';
-import 'widgets/already_have_account_text.dart';
+import 'widgets/dont_have_account_text.dart';
+import 'widgets/email_and_password.dart';
+import 'widgets/login_bloc_listener.dart';
 import 'widgets/terms_and_conditions_text.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  
 
   @override
   Widget build(BuildContext context) {
@@ -41,24 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 Column(
                   children: [
                     const EmailAndPassword(),
-                    const AppTextFieldForm(hintText: 'Email'),
-                    verticalSpace(18),
-                    AppTextFieldForm(
-                      hintText: 'Password',
-                      isObscureText: isObscureText,
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isObscureText = !isObscureText;
-                          });
-                        },
-                        child: Icon(
-                          isObscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                      ),
-                    ),
                     verticalSpace(24),
                     Align(
                       alignment: AlignmentDirectional.center,
@@ -71,12 +49,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     AppTextButton(
                       buttonText: 'Login',
                       textStyle: MyTextStyles.font16WhiteSemiBold,
-                      onPressed: () {},
+                      onPressed: () {
+                        validateThenLogin(context);
+                      },
                     ),
                     verticalSpace(16),
                     const TermsAndConditionsText(),
                     verticalSpace(60),
-                    const AlreadyHaveAccountText(),
+                    const DontHaveAccountText(),
+                    const LoginBlocListener(),
                   ],
                 ),
               ],
@@ -85,5 +66,11 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void validateThenLogin(BuildContext context) {
+    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
+      context.read<LoginCubit>().emitLoginStates();
+    }
   }
 }

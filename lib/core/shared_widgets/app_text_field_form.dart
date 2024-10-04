@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../themes/colors_manager.dart';
 import '../themes/styles.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextFieldForm extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
@@ -14,6 +15,9 @@ class AppTextFieldForm extends StatelessWidget {
   final Widget? suffixIcon;
   final Color? fillColor;
   final Color? suffixIconColor;
+  final TextEditingController? controller;
+  final Function(String?) validator;
+
   const AppTextFieldForm(
       {super.key,
       this.contentPadding,
@@ -25,11 +29,14 @@ class AppTextFieldForm extends StatelessWidget {
       this.isObscureText,
       this.suffixIcon,
       this.fillColor,
-      this.suffixIconColor});
+      this.suffixIconColor,
+      this.controller,
+      required this.validator});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         isDense: true,
         contentPadding: contentPadding ??
@@ -50,6 +57,20 @@ class AppTextFieldForm extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(16),
             ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Colors.red,
+            width: 1.3,
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Colors.red,
+            width: 1.3,
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
         hintStyle: hintStyle ?? MyTextStyles.font14LightGreyRegular,
         hintText: hintText,
         suffixIcon: suffixIcon,
@@ -59,6 +80,7 @@ class AppTextFieldForm extends StatelessWidget {
       ),
       obscureText: isObscureText ?? false,
       style: MyTextStyles.font14DarkBlueMedium,
+      validator: (value) => validator(value),
     );
   }
 }
