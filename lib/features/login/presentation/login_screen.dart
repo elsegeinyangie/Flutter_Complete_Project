@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_project/core/helpers/spacing.dart';
-import 'package:flutter_complete_project/core/shared_widgets/app_text_button.dart';
-import 'package:flutter_complete_project/core/shared_widgets/app_text_field_form.dart';
+import '../../../core/helpers/spacing.dart';
+import '../../../core/shared_widgets/app_text_button.dart';
+import '../../../core/shared_widgets/app_text_field_form.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/themes/styles.dart';

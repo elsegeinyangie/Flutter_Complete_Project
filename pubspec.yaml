@@ -9,6 +9,7 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
+  build_runner: ^2.4.13
   cupertino_icons: ^1.0.8
   dio: ^5.7.0
   easy_localization: ^3.0.7
