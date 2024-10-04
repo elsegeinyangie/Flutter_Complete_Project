@@ -16,8 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final formKey = GlobalKey<FormState>();
-  bool isObscureText = true;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -39,48 +38,46 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: MyTextStyles.font14GreyRegular,
                 ),
                 verticalSpace(36),
-                Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      const AppTextFieldForm(hintText: 'Email'),
-                      verticalSpace(18),
-                      AppTextFieldForm(
-                        hintText: 'Password',
-                        isObscureText: isObscureText,
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isObscureText = !isObscureText;
-                            });
-                          },
-                          child: Icon(
-                            isObscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
+                Column(
+                  children: [
+                    const EmailAndPassword(),
+                    const AppTextFieldForm(hintText: 'Email'),
+                    verticalSpace(18),
+                    AppTextFieldForm(
+                      hintText: 'Password',
+                      isObscureText: isObscureText,
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isObscureText = !isObscureText;
+                          });
+                        },
+                        child: Icon(
+                          isObscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                         ),
                       ),
-                      verticalSpace(24),
-                      Align(
-                        alignment: AlignmentDirectional.center,
-                        child: Text(
-                          'Forgot Password?',
-                          style: MyTextStyles.font13BlueRegular,
-                        ),
+                    ),
+                    verticalSpace(24),
+                    Align(
+                      alignment: AlignmentDirectional.center,
+                      child: Text(
+                        'Forgot Password?',
+                        style: MyTextStyles.font13BlueRegular,
                       ),
-                      verticalSpace(24),
-                      AppTextButton(
-                        buttonText: 'Login',
-                        textStyle: MyTextStyles.font16WhiteSemiBold,
-                        onPressed: () {},
-                      ),
-                      verticalSpace(16),
-                      const TermsAndConditionsText(),
-                      verticalSpace(60),
-                      const AlreadyHaveAccountText(),
-                    ],
-                  ),
+                    ),
+                    verticalSpace(24),
+                    AppTextButton(
+                      buttonText: 'Login',
+                      textStyle: MyTextStyles.font16WhiteSemiBold,
+                      onPressed: () {},
+                    ),
+                    verticalSpace(16),
+                    const TermsAndConditionsText(),
+                    verticalSpace(60),
+                    const AlreadyHaveAccountText(),
+                  ],
                 ),
               ],
             ),
